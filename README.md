@@ -42,3 +42,16 @@ For instances, it seems like the correct thing to do is set is subnet_id and the
 
 Find Ubuntu AMI's here
 https://cloud-images.ubuntu.com/locator/ec2/
+
+“Every Terraform plan or apply follows the same process:
+
+1. We query the state of the resources, if they exist now.
+2. We compare that state against any proposed changes to be made, building the graph of resources and their relationships. As a result of the graph, Terraform will only propose the set of required changes
+3. “If they are not the same, either show the proposed change, if in the plan phase, or make the change, if in the apply phase.”
+
+Destroy a specific resource:
+terraform destroy -target=aws_eip
+
+This command will save a plan that will destroy all resources as base-destroy-epochtime.plan.
+
+$terraform plan -destroy -out base-destroy-`date +'%s'`.plan
